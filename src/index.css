@@ -1,0 +1,23 @@
+:root {
+    --clr-neutral-900: #161618;
+    --clr-neutral-800: #212124;
+    --clr-neutral-700: #3a3a3d;
+    --clr-neutral-600: #555557;
+    --clr-neutral-500: #717174;
+    --clr-neutral-400: #8e8f92;
+    --clr-neutral-300: #adaeb0;
+    --clr-neutral-200: #cdcdd0;
+    --clr-neutral-100: #f8f8fb;
+    --clr-primary: #0284c7;
+}
+
+body {
+    margin: 0;
+
+    font-family: 'Noto Sans', sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color: var(--clr-neutral-100);
+    background-color: var(--clr-neutral-900);
+}
