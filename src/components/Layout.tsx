@@ -1,6 +1,9 @@
 import "./Layout.css";
 import { NavLink, Outlet } from "react-router";
 import type React from "react";
+import { useState } from "react";
+import Button from "./Button";
+import LoginModal from "./LoginModal";
 
 export default function Layout() {
   function A({ href, children }: { href: string, children: React.ReactNode }) {
@@ -14,7 +17,10 @@ export default function Layout() {
     </NavLink>;
   }
 
+  const [loginModalOpen, setLoginModalOpen] = useState(false);
+
   return <div className="layout">
+    <LoginModal open={loginModalOpen} setOpen={setLoginModalOpen} />
     <header className="header">
       <h1 className="header-title">game store</h1>
       <nav className="header-nav">
@@ -22,7 +28,11 @@ export default function Layout() {
         <A href="/about">about</A>
       </nav>
       <div className="header-actions">
-        <button className="header-actions-button">login</button>
+        <Button
+          onClick={() => setLoginModalOpen(true)}
+        >
+          login
+        </Button>
       </div>
     </header>
     <main className="page">

@@ -9,6 +9,7 @@
     --clr-neutral-200: #cdcdd0;
     --clr-neutral-100: #f8f8fb;
     --clr-primary: #0284c7;
+    --clr-error: #ff8b80;
 }
 
 body {

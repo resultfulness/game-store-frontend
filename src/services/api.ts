@@ -15,18 +15,26 @@ export const api = {
     url: import.meta.env.VITE_API_URL,
     async fetch(endpoint: string, options: RequestInit = {}) {
         const url = `${this.url}${endpoint}`;
-        const res = await fetch(url, {
+
+        return fetch(url, {
             ...options,
             headers: {
                 'Content-Type': 'application/json',
                 ...options.headers,
             }
-        });
-        const data = await res.json();
-        if (!res.ok) {
-            throw new APIError(data.detail, res.status);
-        }
-        return data;
+        })
+            .then(async res => {
+                const data = await res.json();
+                if (!res.ok) {
+                    throw new APIError(data.detail, res.status);
+                }
+                return data;
+            })
+            .catch(() => {
+                throw new Error("couldn't connect to api");
+            });
+
+
     },
     get(endpoint: string) {
         return this.fetch(endpoint);

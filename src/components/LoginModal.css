@@ -1,0 +1,17 @@
+.login-modal {
+    background-color: var(--clr-neutral-800);
+    border: 0;
+    color: inherit;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
+
+.login-modal-title {
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.login-form {
+    display: grid;
+    gap: 0.5rem;
+}

@@ -1,0 +1,20 @@
+.button {
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    border: none;
+    background-color: var(--clr-primary);
+    color: inherit;
+    font: inherit;
+    font-weight: 500;
+    cursor: pointer;
+    transition: filter 200ms;
+}
+
+.button:hover {
+    filter: brightness(1.2);
+}
+
+.button:focus {
+    outline: 2px solid var(--clr-primary);
+    outline-offset: 2px;
+}
