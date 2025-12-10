@@ -1,0 +1,56 @@
+.card {
+    background-color: var(--clr-neutral-800);
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+.game-card {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 0.1rem 1rem;
+    grid-template-columns: 1fr auto auto;
+}
+
+.game-title {
+    font-size: 1.5rem;
+}
+
+.game-title {
+    margin: 0;
+}
+
+.game-description {
+    margin-bottom: 0;
+}
+
+.game-details {
+    font-size: 0.75rem;
+    color: var(--clr-neutral-400);
+    grid-row: 2;
+}
+
+.game-description {
+    grid-row: 3;
+}
+
+.game-price {
+    font-size: 1.5rem;
+    text-align: center;
+    grid-row: 3;
+}
+
+.game-rating {
+    font-size: 0.75rem;
+    color: var(--clr-neutral-400);
+    margin-left: 0.5rem;
+}
+
+.game-buy-cta, .game-owned-info {
+    grid-row: 3;
+}
+
+.game-owned-info {
+    padding: 0.5rem 1rem;
+    background-color: var(--clr-neutral-700);
+    border-radius: 0.75rem;
+}

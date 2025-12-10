@@ -1,3 +1,4 @@
+import GameCard from "@/components/GameCard";
 import { api } from "@/services/api";
 import type { Game } from "@/types/game";
 import { useState, useEffect } from "react";
@@ -13,8 +14,12 @@ export default function Games() {
 
   return <div>
     <h2>Games</h2>
-    <ul>
-      {games.map(g => <li key={g.game_id}>{g.title}</li>)}
+    <ul role="list">
+      {games.map(g =>
+        <li key={g.game_id}>
+          <GameCard game={g} />
+        </li>
+      )}
     </ul>
   </div>;
 }
