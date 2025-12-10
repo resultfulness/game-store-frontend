@@ -4,20 +4,23 @@ import type React from "react";
 import { useState } from "react";
 import Button from "./Button";
 import LoginModal from "./LoginModal";
+import { useAuth } from "@/auth";
+
+function A({ href, children }: { href: string, children: React.ReactNode }) {
+  return <NavLink
+    to={href}
+    className={({ isActive }) => {
+      return `header-nav-link ${isActive ? "header-nav-link-active" : ""}`;
+    }}
+  >
+    {children}
+  </NavLink>;
+}
 
 export default function Layout() {
-  function A({ href, children }: { href: string, children: React.ReactNode }) {
-    return <NavLink
-      to={href}
-      className={({ isActive }) => {
-        return `header-nav-link ${isActive ? "header-nav-link-active" : ""}`;
-      }}
-    >
-      {children}
-    </NavLink>;
-  }
-
   const [loginModalOpen, setLoginModalOpen] = useState(false);
+
+  const { user, logout } = useAuth();
 
   return <div className="layout">
     <LoginModal open={loginModalOpen} setOpen={setLoginModalOpen} />
@@ -25,14 +28,14 @@ export default function Layout() {
       <h1 className="header-title">game store</h1>
       <nav className="header-nav">
         <A href="/">home</A>
-        <A href="/about">about</A>
+        <A href="/games">games</A>
+        {user && <A href="/account">{user}</A>}
       </nav>
       <div className="header-actions">
-        <Button
-          onClick={() => setLoginModalOpen(true)}
-        >
-          login
-        </Button>
+        {!user
+          ? <Button onClick={() => setLoginModalOpen(true)}>login</Button>
+          : <Button onClick={() => logout()}>logout</Button>
+        }
       </div>
     </header>
     <main className="page">

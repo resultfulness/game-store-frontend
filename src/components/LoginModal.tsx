@@ -1,3 +1,4 @@
+import { useAuth } from "@/auth";
 import Button from "./Button";
 import Input from "./Input";
 import "./LoginModal.css";
@@ -23,38 +24,46 @@ export default function LoginModal({ open, setOpen }: LoginModalProps) {
         dialog.current!.addEventListener("close", () => setOpen(false));
     })
 
-    const [login, setLogin] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
-    const [errors, setErrors] = useState({ login: "", password: "" })
+    const [errors, setErrors] = useState({ username: "", password: "" })
+
+    const { login } = useAuth();
 
     function handleLogin(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        setErrors({ login: "", password: "" })
+        setErrors({ username: "", password: "" })
         const fd = new FormData(e.target as HTMLFormElement);
-        const login = fd.get("login");
+        const username = fd.get("username");
         const password = fd.get("password");
 
-        if (!login) {
-            setErrors(errors => ({ ...errors, login: "login required" }));
+        if (!username) {
+            setErrors(errors => ({ ...errors, username: "username required" }));
+            return;
         }
 
         if (!password) {
             setErrors(errors => ({ ...errors, password: "password required" }));
             return;
         }
+
+        login(username.toString(), password.toString());
+        setOpen(false);
+        setUsername("");
+        setPassword("");
     }
 
     return <dialog className="login-modal" ref={dialog} closedby="any">
         <h2 className="login-modal-title">Login to your account</h2>
         <form onSubmit={handleLogin} className="login-form">
             <Input
-                label="login:"
+                label="username:"
                 type="text"
-                name="login"
-                value={login}
-                onChange={e => setLogin(e.target.value)}
-                error={errors.login}
+                name="username"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                error={errors.username}
             />
             <Input
                 label="password:"
