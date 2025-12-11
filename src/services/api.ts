@@ -21,7 +21,7 @@ export const api = {
             ...options,
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer: " + token,
+                "Authorization": "Bearer " + token,
                 ...options.headers,
             }
         })
