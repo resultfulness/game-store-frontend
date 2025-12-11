@@ -54,3 +54,8 @@
     background-color: var(--clr-neutral-700);
     border-radius: 0.75rem;
 }
+
+.game-card-list {
+    display: grid;
+    gap: 1rem;
+}

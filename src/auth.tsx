@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { api } from "./services/api";
+import type { User } from "./types/user";
 
 const AuthContext = createContext<{
   user: any,
@@ -12,7 +13,9 @@ const AuthContext = createContext<{
 });
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<string | null>(localStorage.getItem("username"));
+  const [user, setUser] = useState<User | null>(
+    JSON.parse(localStorage.getItem("user") ?? "null")
+  );
 
   function login(username: string, password: string) {
     api.fetch("/auth/login", {
@@ -24,14 +27,17 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     })
       .then(({ access_token }) => {
         localStorage.setItem("token", access_token);
-        localStorage.setItem("username", username);
-        setUser(username);
+
+        api.get("/users/me").then(user => {
+          localStorage.setItem("user", JSON.stringify(user));
+          setUser(user);
+        })
       })
       .catch(e => alert(e));
   }
   function logout() {
     localStorage.removeItem("token");
-    localStorage.removeItem("username");
+    localStorage.removeItem("user");
     setUser(null);
   }
 

@@ -29,7 +29,7 @@ export default function Layout() {
       <nav className="header-nav">
         <A href="/">home</A>
         <A href="/games">games</A>
-        {user && <A href="/account">{user}</A>}
+        {user && <A href="/account">{user.username}</A>}
       </nav>
       <div className="header-actions">
         {!user
