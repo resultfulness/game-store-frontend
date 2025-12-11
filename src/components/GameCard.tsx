@@ -2,7 +2,7 @@ import Button from "./Button";
 import "./GameCard.css";
 import type { Game } from "@/types/game";
 
-export default function GameCard({ game, owned }: { game: Game, owned: boolean }) {
+export default function GameCard({ game, owned }: { game: Game, owned?: boolean }) {
     return <div className="card game-card">
         <h3 className="game-title">{game.title}</h3>
         <div className="game-details">

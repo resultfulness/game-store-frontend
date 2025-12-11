@@ -3,7 +3,7 @@ import { api } from "./services/api";
 import type { User } from "./types/user";
 
 const AuthContext = createContext<{
-  user: any,
+  user: User | null,
   login: (username: string, password: string) => void,
   logout: () => void,
 }>({
