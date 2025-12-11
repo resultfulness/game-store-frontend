@@ -1,0 +1,22 @@
+.posts-page {
+    max-width: 100%;
+}
+
+.posts-page-title {
+    margin: 0 0 2rem 0;
+    font-size: 2rem;
+    color: var(--clr-neutral-200);
+}
+
+
+.posts-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.posts-empty {
+    text-align: center;
+    color: var(--clr-neutral-500);
+    padding: 3rem;
+    font-style: italic;
+}

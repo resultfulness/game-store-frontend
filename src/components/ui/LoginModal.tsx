@@ -1,6 +1,7 @@
 import { useAuth } from "@/auth";
 import Button from "./Button";
 import Input from "./Input";
+import AlertModal from "./AlertModal";
 import "./LoginModal.css";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
@@ -26,6 +27,8 @@ export default function LoginModal({ open, setOpen }: LoginModalProps) {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [showError, setShowError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [errors, setErrors] = useState({ username: "", password: "" })
 
@@ -48,10 +51,16 @@ export default function LoginModal({ open, setOpen }: LoginModalProps) {
             return;
         }
 
-        login(username.toString(), password.toString());
-        setOpen(false);
-        setUsername("");
-        setPassword("");
+        login(username.toString(), password.toString())
+            .then(() => {
+                setOpen(false);
+                setUsername("");
+                setPassword("");
+            })
+            .catch((error: any) => {
+                setErrorMessage(error?.message || "Login failed. Please check your credentials.");
+                setShowError(true);
+            });
     }
 
     return <dialog className="login-modal" ref={dialog} closedby="any">
@@ -75,5 +84,12 @@ export default function LoginModal({ open, setOpen }: LoginModalProps) {
             />
             <Button>login</Button>
         </form>
+        <AlertModal
+            open={showError}
+            title="Login Error"
+            message={errorMessage}
+            onClose={() => setShowError(false)}
+            variant="error"
+        />
     </dialog>;
 }

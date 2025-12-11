@@ -4,11 +4,11 @@ import type { User } from "./types/user";
 
 const AuthContext = createContext<{
   user: User | null,
-  login: (username: string, password: string) => void,
+  login: (username: string, password: string) => Promise<void>,
   logout: () => void,
 }>({
   user: null,
-  login: () => { },
+  login: async () => { },
   logout: () => { },
 });
 
@@ -17,23 +17,19 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     JSON.parse(localStorage.getItem("user") ?? "null")
   );
 
-  function login(username: string, password: string) {
-    api.fetch("/auth/login", {
+  async function login(username: string, password: string) {
+    const { access_token } = await api.fetch("/auth/login", {
       method: "POST",
       body: new URLSearchParams({ username, password }),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-    })
-      .then(({ access_token }) => {
-        localStorage.setItem("token", access_token);
+    });
+    localStorage.setItem("token", access_token);
 
-        api.get("/users/me").then(user => {
-          localStorage.setItem("user", JSON.stringify(user));
-          setUser(user);
-        })
-      })
-      .catch(e => alert(e));
+    const user = await api.get("/users/me");
+    localStorage.setItem("user", JSON.stringify(user));
+    setUser(user);
   }
   function logout() {
     localStorage.removeItem("token");

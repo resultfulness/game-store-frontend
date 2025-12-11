@@ -1,0 +1,32 @@
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.5rem;
+    background-color: var(--clr-neutral-700);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--clr-neutral-200);
+}
+
+.tag-remove {
+    background: none;
+    border: none;
+    color: var(--clr-neutral-400);
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    padding: 0;
+    margin-left: 0.25rem;
+    transition: color 200ms;
+}
+
+.tag-remove:hover {
+    color: var(--clr-neutral-200);
+}
+
+.tag-remove:focus {
+    outline: 2px solid var(--clr-primary);
+    outline-offset: 2px;
+    border-radius: 0.25rem;
+}

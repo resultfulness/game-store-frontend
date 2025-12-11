@@ -1,0 +1,39 @@
+.comment-create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--clr-neutral-700);
+}
+
+.comment-create-content {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--clr-neutral-600);
+    background-color: var(--clr-neutral-900);
+    color: var(--clr-neutral-100);
+    font: inherit;
+    resize: vertical;
+    min-height: 3rem;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
+}
+
+.comment-create-content:focus {
+    outline: 2px solid var(--clr-primary);
+    outline-offset: 2px;
+    border-color: var(--clr-primary);
+}
+
+.comment-create-submit {
+    align-self: flex-end;
+}
+
+.comment-create-submit:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

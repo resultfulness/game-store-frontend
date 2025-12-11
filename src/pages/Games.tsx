@@ -1,18 +1,24 @@
 import { useAuth } from "@/auth";
-import GameCard from "@/components/GameCard";
+import GameCard from "@/components/games/GameCard";
+import AlertModal from "@/components/ui/AlertModal";
 import { api } from "@/services/api";
 import type { Game } from "@/types/game";
 import { useState, useEffect } from "react";
 
 export default function Games() {
   const [games, setGames] = useState<Game[]>([]);
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { user } = useAuth();
 
   useEffect(() => {
     api.get("/games")
       .then(games => setGames(games))
-      .catch(e => alert(e));
+      .catch(e => {
+        setErrorMessage(e?.message || "Failed to load games");
+        setShowError(true);
+      });
   }, []);
 
   return <div>
@@ -24,5 +30,12 @@ export default function Games() {
         </li>
       )}
     </ul>
+    <AlertModal
+      open={showError}
+      title="Error"
+      message={errorMessage}
+      onClose={() => setShowError(false)}
+      variant="error"
+    />
   </div>;
 }

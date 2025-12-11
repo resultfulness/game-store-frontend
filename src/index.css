@@ -21,6 +21,9 @@ body {
 
     color: var(--clr-neutral-100);
     background-color: var(--clr-neutral-900);
+    
+    /* Always reserve scrollbar space to prevent layout shift */
+    overflow-y: scroll;
 }
 
 ul[role="list"] {

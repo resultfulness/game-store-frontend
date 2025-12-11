@@ -1,4 +1,4 @@
-import Button from "./Button";
+import Button from "../ui/Button";
 import "./GameCard.css";
 import type { Game } from "@/types/game";
 
@@ -18,5 +18,5 @@ export default function GameCard({ game, owned }: { game: Game, owned?: boolean 
             ? <div className="game-owned-info">already owned</div>
             : <Button className="game-buy-cta">buy now</Button>
         }
-    </div>
+    </div>;
 }
