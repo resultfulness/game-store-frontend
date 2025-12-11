@@ -15,11 +15,13 @@ export const api = {
     url: import.meta.env.VITE_API_URL,
     async fetch(endpoint: string, options: RequestInit = {}) {
         const url = `${this.url}${endpoint}`;
+        const token = localStorage.getItem("token");
 
         return fetch(url, {
             ...options,
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
+                "Authorization": "Bearer: " + token,
                 ...options.headers,
             }
         })
