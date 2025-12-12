@@ -85,7 +85,7 @@ export default function Posts() {
 
   return (
     <div className="posts-page">
-      <h1 className="posts-page-title">Posts</h1>
+      <h2 className="posts-page-title">Posts</h2>
       <PostCreateForm onSubmit={handleCreatePost} />
       <TagFilter
         tags={allTags}
