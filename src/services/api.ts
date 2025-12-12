@@ -17,6 +17,8 @@ export const api = {
         const url = `${this.url}${endpoint}`;
         const token = localStorage.getItem("token");
 
+
+
         return fetch(url, {
             ...options,
             headers: {
@@ -25,18 +27,16 @@ export const api = {
                 ...options.headers,
             }
         })
+            .catch(() => {
+                throw new Error("couldn't connect to api");
+            })
             .then(async res => {
                 const data = await res.json();
                 if (!res.ok) {
                     throw new APIError(data.detail, res.status);
                 }
                 return data;
-            })
-            .catch(() => {
-                throw new Error("couldn't connect to api");
             });
-
-
     },
     get(endpoint: string) {
         return this.fetch(endpoint);
