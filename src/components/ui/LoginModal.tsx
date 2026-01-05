@@ -58,6 +58,7 @@ export default function LoginModal({ open, setOpen }: LoginModalProps) {
                 setPassword("");
             })
             .catch((error: any) => {
+                setOpen(false);
                 setErrorMessage(error?.message || "Login failed. Please check your credentials.");
                 setShowError(true);
             });
