@@ -50,6 +50,6 @@ test("fails to log in with invalid credentials", async ({ page }) => {
     await b.click();
 
     await d.waitFor({ state: "detached" });
-
+    await page.locator(".alert-modal").waitFor({state: "visible"})
     expect(page.getByRole("heading", { name: "Login error" })).toBeVisible();
 });
