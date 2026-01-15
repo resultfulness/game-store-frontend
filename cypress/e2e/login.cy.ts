@@ -2,9 +2,10 @@ describe("Login", () => {
     before(() => {
         const api = Cypress.env("VITE_API_URL");
 
-        cy.request(api + "/users").then(res => {
-            if ((res.body as any[])
-                .filter(el => el.username === "test").length <= 0
+        cy.request(api + "/users").then((res) => {
+            if (
+                (res.body as any[]).filter((el) => el.username === "test")
+                    .length <= 0
             ) {
                 cy.request("POST", api + "/users/register", {
                     username: "test",
@@ -26,8 +27,9 @@ describe("Login", () => {
         cy.get(".login-form").submit();
 
         const origin = Cypress.config("baseUrl")!;
+        cy.wait(500);
 
-        cy.getAllLocalStorage().then(res => {
+        cy.getAllLocalStorage().then((res) => {
             expect(res[origin].token).to.be.not.null;
         });
 
@@ -45,8 +47,9 @@ describe("Login", () => {
 
         cy.get(".alert-modal").should("exist");
         cy.get(".alert-modal-title").should("contain", "Login Error");
-        cy
-            .get(".alert-modal-message")
-            .should("contain", "Incorrent username or password");
-    })
-})
+        cy.get(".alert-modal-message").should(
+            "contain",
+            "Incorrent username or password",
+        );
+    });
+});
