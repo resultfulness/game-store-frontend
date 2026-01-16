@@ -34,8 +34,10 @@ test("logout logged user", async ({ page }) => {
         .and(page.getByPlaceholder("What's on your mind?"))
         .fill("test post");
 
+    const count = await page.locator('.post-card').count()
+
     await page.getByRole("button", { name: "Post", exact: true }).click();
     await page.waitForResponse("http://localhost:8000/posts/");
 
-    await expect(page.locator('.post-card')).toHaveCount(0);
+    await expect(page.locator('.post-card')).toHaveCount(count);
 });
